@@ -12,13 +12,19 @@ Parse the log files in powershell (extract IP addresses)
 
 
 new-item -itemtype directory c:\logs\parsed
+
 Get-ChildItem c:\logs\*.log |
 Foreach {
 $input_path = "$_"
+
 $output_file = "c:\logs\parsed\$_"
+
 new-item -ItemType file $output_file
+
 $regex = ‘\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b’
+
 select-string -Path $input_path -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value } > $output_file
+
 } 
  
  
