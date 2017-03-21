@@ -26,6 +26,7 @@ Dedupe the IP addresses
 
 
 new-item -itemtype directory c:\logs\dedupe
+
 Get-ChildItem c:\logs\parsed\*.log |
 Foreach {
 $set = @{}
@@ -45,9 +46,9 @@ Copy deduped content into one log file for easy reading
 
 
 $output_file = "loglog.txt"
+
 Get-ChildItem c:\logs\dedupe\*.log |
 Foreach { 
- 
 $_.name >> $output_file
 get-content $_ >> $output_file
 } 
