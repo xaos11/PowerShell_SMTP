@@ -41,3 +41,4 @@ Foreach {
 $_.name >> $output_file
 get-content $_ >> $output_file
 } 
+ 
