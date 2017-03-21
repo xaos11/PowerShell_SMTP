@@ -15,6 +15,7 @@ new-item -itemtype directory c:\logs\parsed
 
 Get-ChildItem c:\logs\*.log |
 Foreach {
+
 $input_path = "$_"
 
 $output_file = "c:\logs\parsed\$_"
@@ -35,6 +36,7 @@ new-item -itemtype directory c:\logs\dedupe
 
 Get-ChildItem c:\logs\parsed\*.log |
 Foreach {
+
 $set = @{}
 $name = $_.Name
 $fullname = "c:\logs\dedupe\" + $name
