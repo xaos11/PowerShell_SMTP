@@ -4,9 +4,13 @@ PowerShell scripts to scrape SMTP logs for IP addresses to identify authorized s
 
 Place all log files in C:\logs\ on a workstation
 Convert file names to date modified for easy reading
+
 Get-ChildItem c:\logs\*.log | Rename-Item -newname {$_.LastWriteTime.toString("yyyy.MM.dd.HH.mm") + ".log"} 
  
+ 
 Parse the log files in powershell (extract IP addresses)
+
+
 new-item -itemtype directory c:\logs\parsed
 Get-ChildItem c:\logs\*.log |
 Foreach {
@@ -17,7 +21,10 @@ $regex = ‘\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b’
 select-string -Path $input_path -Pattern $regex -AllMatches | % { $_.Matches } | % { $_.Value } > $output_file
 } 
  
+ 
 Dedupe the IP addresses
+
+
 new-item -itemtype directory c:\logs\dedupe
 Get-ChildItem c:\logs\parsed\*.log |
 Foreach {
@@ -33,7 +40,10 @@ Get-Content $_ | %{
  
 } 
  
+ 
 Copy deduped content into one log file for easy reading
+
+
 $output_file = "loglog.txt"
 Get-ChildItem c:\logs\dedupe\*.log |
 Foreach { 
